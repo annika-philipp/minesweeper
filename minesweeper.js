@@ -17,6 +17,9 @@ var board = {
 function startGame () {
   // Don't remove this function call: it makes the game work!
 
+  document.addEventListener('click', 'checkForWin');
+  document.addEventListener('contextmenu', 'checkForWin');
+
   for (var i = 0; i < board.cells.length; i++){
     board.cells[i]['surroundingMines'] = countSurroundingMines(board.cells[i])
 
