@@ -32,15 +32,20 @@ function startGame () {
 //
 // 1. Are all of the cells that are NOT mines visible?
 // 2. Are all of the mines marked?
+
 function checkForWin () {
 
- for (var x = 0; x < board.cells.length; x++) {
+  for (var x = 0; x < board.cells.length; x++) {
     if (((board.cells[x].isMine === true) && (board.cells[x].isMarked === true)) && (board.cells[x].hidden === false))
     lib.displayMessage('You win!')
   }
-}  
+}
 
-/*    for (var x = 0; x < board.cells.length; x++) {
+/*   FUNCTION OPTION 2
+
+  function checkForWin () {
+
+    for (var x = 0; x < board.cells.length; x++) {
       if ((board.cells[x].isMine === true) && (board.cells[x].isMarked === false)) {
         return;
       }
@@ -52,11 +57,14 @@ function checkForWin () {
       }
     }
 }  
+
 */
 
   // You can use this function call to declare a winner (once you've
   // detected that they've won, that is!)
-  //   lib.displayMessage('You win!')
+  //lib.displayMessage('You win!')
+ 
+
 
 
 // Define this function to count the number of mines around the cell
