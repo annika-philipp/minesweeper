@@ -3,22 +3,22 @@ document.addEventListener('DOMContentLoaded', startGame)
 // Define your `board` object here!
 var board = {
   cells: [
+    {row: 0, col: 1, isMine: false, hidden: true, isMarked: false}, 
+    {row: 0, col: 2, isMine: true, hidden: true, isMarked: false}, 
+    {row: 0, col: 3, isMine: false, hidden: true, isMarked: false}, 
     {row: 1, col: 1, isMine: false, hidden: true, isMarked: false}, 
     {row: 1, col: 2, isMine: false, hidden: true, isMarked: false}, 
-    {row: 1, col: 3, isMine: false, hidden: true, isMarked: false}, 
-    {row: 2, col: 1, isMine: false, hidden: true, isMarked: false}, 
-    {row: 2, col: 2, isMine: false, hidden: true, isMarked: false}, 
-    {row: 2, col: 3, isMine: true, hidden: true, isMarked: false}, 
-    {row: 3, col: 1, isMine: true, hidden: true, isMarked: false},
-    {row: 3, col: 2, isMine: false, hidden: true, isMarked: false},
-    {row: 3, col: 3, isMine: false, hidden: true, isMarked: false}]
+    {row: 1, col: 3, isMine: true, hidden: true, isMarked: false}, 
+    {row: 2, col: 1, isMine: true, hidden: true, isMarked: false},
+    {row: 2, col: 2, isMine: false, hidden: true, isMarked: false},
+    {row: 2, col: 3, isMine: false, hidden: true, isMarked: false}]
 }
 
 function startGame () {
   // Don't remove this function call: it makes the game work!
 
- // document.addEventListener('click', 'checkForWin');
- // document.addEventListener('contextmenu', 'checkForWin');
+  document.addEventListener('click', checkForWin);
+  document.addEventListener('contextmenu', checkForWin);
 
   for (var i = 0; i < board.cells.length; i++){
     board.cells[i]['surroundingMines'] = countSurroundingMines(board.cells[i])
@@ -33,33 +33,24 @@ function startGame () {
 // 1. Are all of the cells that are NOT mines visible?
 // 2. Are all of the mines marked?
 
+
 function checkForWin () {
-
-  for (var x = 0; x < board.cells.length; x++) {
-    if (((board.cells[x].isMine === true) && (board.cells[x].isMarked === true)) && (board.cells[x].hidden === false))
-    lib.displayMessage('You win!')
-  }
-}
-
-/*   FUNCTION OPTION 2
-
-  function checkForWin () {
-
-    for (var x = 0; x < board.cells.length; x++) {
-      if ((board.cells[x].isMine === true) && (board.cells[x].isMarked === false)) {
+  for (var i = 0; i < board.cells.length; i++){
+    var checkCell = board.cells[i];
+    if (checkCell.isMine == true) {
+      if (checkCell.isMarked == false) {
         return;
-      }
-      if (board.cells[x].hidden === true){
-        return;
-      }
-      else {
-        lib.displayMessage('You win!');
       }
     }
-}  
-
-*/
-
+  
+    if (checkCell.isMine == false) {
+      if (checkCell.hidden == true) {
+        return;
+      }
+    }
+  }
+  lib.displayMessage('You win!')
+}
   // You can use this function call to declare a winner (once you've
   // detected that they've won, that is!)
   //lib.displayMessage('You win!')
