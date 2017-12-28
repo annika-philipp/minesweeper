@@ -25,19 +25,26 @@ var board = {
 
 function createBoard () {
   board.cells = [];
-  var boardWidth = 3;
+  var boardWidth = 6;
   for (var x = 0; x < boardWidth; x++) { //loops through rows
     for (var y = 0; y < boardWidth; y++) { //loops through cols
-      board.cells.push({row: x, col: y, isMine: true, hidden: true, isMarked: true}); //adds 9 objects to array cells
+      board.cells.push({row: x, col: y, isMine: assignMines(), hidden: true, isMarked: true}); //adds 9 objects to array cells
     }
   } 
-  return board;
 };
+
+/*
+function assignMines() {
+  var totalCells = board.cells.length //9
+  var totalMines = Math.floor(totalCells * 0.2); //20% of all cells = mines
+}
+*/
+
 
 
 function startGame () {
   // Don't remove this function call: it makes the game work!
-  
+
   //adding create board into startGame
   createBoard();
 
@@ -104,5 +111,9 @@ function countSurroundingMines (cell) {
 
 
 
+}
+
+function assignMines() {
+  return (Math.random ( ) < 0.2) //returns either true or false
 }
 
