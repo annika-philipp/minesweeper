@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', startGame)
 
 // Define your `board` object here!
-var board = {
+/*var board = {
   cells: [
     {row: 0, col: 1, isMine: false, hidden: true, isMarked: false}, 
     {row: 0, col: 2, isMine: true, hidden: true, isMarked: false}, 
@@ -13,9 +13,33 @@ var board = {
     {row: 2, col: 2, isMine: false, hidden: true, isMarked: false},
     {row: 2, col: 3, isMine: false, hidden: true, isMarked: false}]
 }
+*/
+//Defining board
+var board = {
+  cells: [
+
+  ]
+};
+
+//Adding cells to board 
+
+function createBoard () {
+  board.cells = [];
+  var boardWidth = 3;
+  for (var x = 0; x < boardWidth; x++) { //loops through rows
+    for (var y = 0; y < boardWidth; y++) { //loops through cols
+      board.cells.push({row: x, col: y, isMine: true, hidden: true, isMarked: true}); //adds 9 objects to array cells
+    }
+  } 
+  return board;
+};
+
 
 function startGame () {
   // Don't remove this function call: it makes the game work!
+  
+  //adding create board into startGame
+  createBoard();
 
   document.addEventListener('click', checkForWin);
   document.addEventListener('contextmenu', checkForWin);
