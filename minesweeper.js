@@ -26,19 +26,19 @@ var board = {
 function createBoard () {
   board.cells = [];
   var boardWidth = 6;
-  for (var x = 0; x < boardWidth; x++) { //loops through rows
-    for (var y = 0; y < boardWidth; y++) { //loops through cols
+  for (var x = 0; x < boardWidth; x++) { //loops rows
+    for (var y = 0; y < boardWidth; y++) { //loops cols
       board.cells.push({row: x, col: y, isMine: assignMines(), hidden: true, isMarked: true}); //adds 9 objects to array cells
     }
   } 
 };
 
-/*
+// randomly assign mines
+
 function assignMines() {
-  var totalCells = board.cells.length //9
-  var totalMines = Math.floor(totalCells * 0.2); //20% of all cells = mines
+  return (Math.random ( ) < 0.2) //returns either true or false
 }
-*/
+
 
 
 
@@ -59,6 +59,7 @@ function startGame () {
   lib.initBoard()
 }
 
+
 // Define this function to look for a win condition:
 //
 // 1. Are all of the cells that are NOT mines visible?
@@ -66,21 +67,20 @@ function startGame () {
 
 
 function checkForWin () {
+
   for (var i = 0; i < board.cells.length; i++){
-    var checkCell = board.cells[i];
-    if (checkCell.isMine == true) {
-      if (checkCell.isMarked == false) {
-        return;
-      }
-    }
-  
-    if (checkCell.isMine == false) {
-      if (checkCell.hidden == true) {
-        return;
-      }
-    }
+    var cell = board.cells[i];
+
+    if (cell.isMine &&  !cell.isMarked) {
+      return;
+    } 
+    
+    if (!cell.isMine && cell.hidden) {
+      return;
+    } 
   }
   lib.displayMessage('You win!')
+
 }
   // You can use this function call to declare a winner (once you've
   // detected that they've won, that is!)
@@ -111,9 +111,5 @@ function countSurroundingMines (cell) {
 
 
 
-}
-
-function assignMines() {
-  return (Math.random ( ) < 0.2) //returns either true or false
 }
 
