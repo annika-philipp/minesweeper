@@ -1,19 +1,29 @@
 document.addEventListener('DOMContentLoaded', startGame)
 
 // Define your `board` object here!
-/*var board = {
+/*
+var board = {
   cells: [
-    {row: 0, col: 1, isMine: false, hidden: true, isMarked: false}, 
-    {row: 0, col: 2, isMine: true, hidden: true, isMarked: false}, 
-    {row: 0, col: 3, isMine: false, hidden: true, isMarked: false}, 
-    {row: 1, col: 1, isMine: false, hidden: true, isMarked: false}, 
-    {row: 1, col: 2, isMine: false, hidden: true, isMarked: false}, 
-    {row: 1, col: 3, isMine: true, hidden: true, isMarked: false}, 
-    {row: 2, col: 1, isMine: true, hidden: true, isMarked: false},
-    {row: 2, col: 2, isMine: false, hidden: true, isMarked: false},
-    {row: 2, col: 3, isMine: false, hidden: true, isMarked: false}]
+    {row: 0, col: 1, isMine: assignMines(), hidden: true, isMarked: false}, 
+    {row: 0, col: 2, isMine: assignMines(), hidden: true, isMarked: false}, 
+    {row: 0, col: 3, isMine: assignMines(), hidden: true, isMarked: false}, 
+    {row: 0, col: 4, isMine: assignMines(), hidden: true, isMarked: false}, 
+    {row: 1, col: 1, isMine: assignMines(), hidden: true, isMarked: false}, 
+    {row: 1, col: 2, isMine: assignMines(), hidden: true, isMarked: false}, 
+    {row: 1, col: 3, isMine: assignMines(), hidden: true, isMarked: false}, 
+    {row: 1, col: 4, isMine: assignMines(), hidden: true, isMarked: false}, 
+    {row: 2, col: 1, isMine: assignMines(), hidden: true, isMarked: false},
+    {row: 2, col: 2, isMine: assignMines(), hidden: true, isMarked: false},
+    {row: 2, col: 3, isMine: assignMines(), hidden: true, isMarked: false},
+    {row: 2, col: 4, isMine: assignMines(), hidden: true, isMarked: false}, 
+    {row: 3, col: 1, isMine: assignMines(), hidden: true, isMarked: false},
+    {row: 3, col: 2, isMine: assignMines(), hidden: true, isMarked: false},
+    {row: 3, col: 3, isMine: assignMines(), hidden: true, isMarked: false},
+    {row: 3, col: 4, isMine: assignMines(), hidden: true, isMarked: false}, 
+  ]
 }
 */
+
 //Defining board
 var board = {
   cells: [
@@ -28,7 +38,7 @@ function createBoard () {
   var boardWidth = 6;
   for (var x = 0; x < boardWidth; x++) { //loops rows
     for (var y = 0; y < boardWidth; y++) { //loops cols
-      board.cells.push({row: x, col: y, isMine: assignMines(), hidden: true, isMarked: true}); //adds 9 objects to array cells
+      board.cells.push({row: x, col: y, isMine: assignMines(), hidden: true, isMarked: true, surroundingMines: 0}); //adds 9 objects to array cells
     }
   } 
 };
@@ -36,9 +46,8 @@ function createBoard () {
 // randomly assign mines
 
 function assignMines() {
-  return (Math.random ( ) < 0.2) //returns either true or false
+  return (Math.random () < 0.2) //returns either true or false
 }
-
 
 
 
@@ -82,6 +91,7 @@ function checkForWin () {
   lib.displayMessage('You win!')
 
 }
+
   // You can use this function call to declare a winner (once you've
   // detected that they've won, that is!)
   //lib.displayMessage('You win!')
