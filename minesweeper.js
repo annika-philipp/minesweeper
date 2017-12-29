@@ -38,7 +38,7 @@ function createBoard () {
   var boardWidth = 6;
   for (var x = 0; x < boardWidth; x++) { //loops rows
     for (var y = 0; y < boardWidth; y++) { //loops cols
-      board.cells.push({row: x, col: y, isMine: assignMines(), hidden: true, isMarked: true, surroundingMines: 0}); //adds 9 objects to array cells
+      board.cells.push({row: x, col: y, isMine: assignMines(), hidden: true, isMarked: true, surroundingMines: 0}); //adds objects to array cells
     }
   } 
 };
