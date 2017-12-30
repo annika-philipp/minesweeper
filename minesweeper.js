@@ -24,6 +24,7 @@ var board = {
 }
 */
 
+
 //Defining board
 var board = {
   cells: [
@@ -35,13 +36,16 @@ var board = {
 
 function createBoard () {
   board.cells = [];
-  var boardWidth = 6;
-  for (var x = 0; x < boardWidth; x++) { //loops rows
-    for (var y = 0; y < boardWidth; y++) { //loops cols
-      board.cells.push({row: x, col: y, isMine: assignMines(), hidden: true, isMarked: false, surroundingMines: 0}); //adds objects to array cells
-    }
-  } 
+  var boardWidth = document.getElementById("difficultyLevel").value;  //3, 5, 6
+//  var boardWidth = 6;
+    for (var x = 0; x < boardWidth; x++) { //loops rows
+      for (var y = 0; y < boardWidth; y++) { //loops cols
+        board.cells.push({row: x, col: y, isMine: assignMines(), hidden: true, isMarked: false, surroundingMines: 0}); //adds objects to array cells
+      }
+    } 
 };
+
+
 
 // randomly assign mines
 
@@ -57,6 +61,8 @@ function startGame () {
   //adding create board into startGame
   createBoard();
 
+  document.getElementById("difficultyLevel").onchange = resetBoard;
+  document.getElementById("reset").onclick = resetBoard;
   document.addEventListener('click', checkForWin);
   document.addEventListener('contextmenu', checkForWin);
 
@@ -67,6 +73,14 @@ function startGame () {
 
   lib.initBoard()
 }
+
+
+//resets board
+function resetBoard () {
+  document.getElementsByClassName('board')[0].innerHTML = ''; //reassigns board to empty
+  startGame();
+}
+
 
 
 // Define this function to look for a win condition:
